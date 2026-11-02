@@ -21,22 +21,43 @@ public class TripPoint {
 		this.lon = lon;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTime() {
 		return time;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public double getLat() {
 		return lat;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public double getLon() {
 		return lon;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public static ArrayList<TripPoint> getTrip() {
 		return trip;
 	}
 	
+	/**
+	 * 
+	 * @param filename
+	 * @throws FileNotFoundException
+	 */
 	public static void readFile(String filename) throws FileNotFoundException {
 		trip.clear();
 		
@@ -52,6 +73,10 @@ public class TripPoint {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public static double totalTime() {
 		double totalTime = 0.0;
 		
@@ -67,6 +92,12 @@ public class TripPoint {
 		return totalTime / 60;
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public static double haversineDistance(TripPoint a, TripPoint b) {
 		// Wikipedia defines this as: hav(theta) = hav(delta of phi) + cos(phi1) * cos(phi2) * hav(delta of lambda)
 		
@@ -86,6 +117,10 @@ public class TripPoint {
 		return EARTH_RADIUS * radians;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public static double totalDistance() {
 		double totalDistance = 0.0;
 		
@@ -98,6 +133,12 @@ public class TripPoint {
 		return totalDistance;
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public static double avgSpeed(TripPoint a, TripPoint b) {
 		double distance = haversineDistance(a, b);
 				
