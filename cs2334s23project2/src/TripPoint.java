@@ -52,6 +52,21 @@ public class TripPoint {
 		}
 	}
 	
+	public static double totalTime() {
+		double totalTime = 0.0;
+		
+		double lastTime = 0;
+		
+		for (TripPoint point : trip) {
+			double currentTime = point.getTime();
+			
+			totalTime += currentTime - lastTime;
+			lastTime = currentTime;
+		}
+		
+		return totalTime / 60;
+	}
+	
 	// Main methods
 	public double haversineDistance(TripPoint a, TripPoint b) {
 		// Wikipedia defines this as: hav(theta) = hav(delta of phi) + cos(phi1) * cos(phi2) * hav(delta of lambda)
