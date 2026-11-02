@@ -7,7 +7,7 @@ public class TripPoint {
 	private double lon;
 	private static ArrayList<TripPoint> trip = new ArrayList<TripPoint>();;
 	
-	private static final double EARTH_RADIUS = 6371.2; // Taken from the Wikipedia example
+	private static final double EARTH_RADIUS = 6371.0;
 	
 	/**
 	 * 
@@ -21,7 +21,6 @@ public class TripPoint {
 		this.lon = lon;
 	}
 
-	// Getters
 	public int getTime() {
 		return time;
 	}
@@ -38,8 +37,9 @@ public class TripPoint {
 		return trip;
 	}
 	
-	// Helpers
 	public static void readFile(String filename) throws FileNotFoundException {
+		trip.clear();
+		
 		Scanner sc = new Scanner(new File(filename));
 		sc.nextLine(); // Trust that it is a real csv formatted properly
 		
@@ -67,8 +67,7 @@ public class TripPoint {
 		return totalTime / 60;
 	}
 	
-	// Main methods
-	public double haversineDistance(TripPoint a, TripPoint b) {
+	public static double haversineDistance(TripPoint a, TripPoint b) {
 		// Wikipedia defines this as: hav(theta) = hav(delta of phi) + cos(phi1) * cos(phi2) * hav(delta of lambda)
 		
 		// First, we convert the variables from degrees to radians
@@ -87,5 +86,15 @@ public class TripPoint {
 		return EARTH_RADIUS * radians;
 	}
 	
-	
+	public static double totalDistance() {
+		double totalDistance = 0.0;
+		
+		for (int i = 0; i < trip.size(); i++) {
+			if (i < trip.size() - 1) {
+				totalDistance += haversineDistance(trip.get(i), trip.get(i + 1));
+			}
+		}
+		
+		return totalDistance;
+	}
 }
