@@ -97,4 +97,15 @@ public class TripPoint {
 		
 		return totalDistance;
 	}
+	
+	public static double avgSpeed(TripPoint a, TripPoint b) {
+		double distance = haversineDistance(a, b);
+		
+		double aTime = a.getTime();
+		double bTime = b.getTime();
+		
+		double timeElapsed = Math.max(aTime, bTime) - Math.min(aTime, bTime);
+		
+		return distance / timeElapsed;
+	}
 }
